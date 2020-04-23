@@ -1,9 +1,11 @@
 import asyncio
+import ipaddress
 
 async def handle_client(reader, writer):
     res = await reader.read()
-    res = res.decode()
-    print(res)
+    message = res.decode()
+    addr = writer.get_extra_info('peername')
+    print(f"Received {message!r} from {addr[0]!r}")
 
 async def main():
     server = await asyncio.start_server(handle_client, 'localhost', 5760)
