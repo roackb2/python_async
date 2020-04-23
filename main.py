@@ -1,17 +1,13 @@
 import asyncio
-
-async def hello():
-    await asyncio.sleep(1)
-    print('hello')
-
-async def world():
-    await asyncio.sleep(2)
-    print('world')
+from window import Window
+from server import Server
 
 async def main():
-    task1 = asyncio.create_task(world())
-    task2 = asyncio.create_task(hello())
-    await task1
-    await task2
+    window = Window()
+    server = Server()
+
+    server_task = server.get_task()
+    await (window.get_task())
+    await server_task
 
 asyncio.run(main())
